@@ -11,8 +11,8 @@ LABEL maintainer=rikugun
 
 WORKDIR /app
 RUN mkdir static
-COPY --from=bulder /go/src/github.com/rikugun/resolve-hosts/resolve-hosts .
-COPY --from=bulder /go/src/github.com/rikugun/resolve-hosts/servers.txt .
+COPY --from=builder /go/src/github.com/rikugun/resolve-hosts/resolve-hosts .
+COPY --from=builder /go/src/github.com/rikugun/resolve-hosts/servers.txt .
 
 EXPOSE 3000
 CMD ["./resolve-hosts"]
