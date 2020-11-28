@@ -1,0 +1,27 @@
+name: Build ResolveHost
+
+on:
+  push:
+    branchs:
+      - master
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+
+      - name: Build the Docker image
+        run: |
+          docker build . --file Dockerfile --tag rikugun/resolve-host:latest
+
+      - name: Push Dcoker Image
+        run: |
+          echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login  --username rikugun --password-stdin
+          docker push rikugun/resolve-host:latest
+
+
