@@ -1,4 +1,4 @@
-FROM go:alpine:3.12 as builder
+FROM golang:alpine as builder
 
 ARG SRC_PATH=/go/src/github.com/rikugun/resolve-hosts
 WORKDIR ${SRC_PATH}
