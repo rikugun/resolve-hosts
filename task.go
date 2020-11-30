@@ -14,7 +14,7 @@ import (
 func AutoResolveHost() {
 	resolveHost()
 	//每10分钟自动解析
-	spec := "10/* * * * *"
+	spec := "*/10 * * * *"
 	c := cron.New()
 	c.AddFunc(spec, resolveHost)
 	c.Start()
