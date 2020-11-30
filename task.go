@@ -46,7 +46,7 @@ func resolveHost() {
 			log.Printf("resolve [%s] \n", hostname)
 			if hosts, err := net.LookupHost(hostname); err == nil {
 				for i := 0; i < len(hosts); i++ {
-					hostsFile.WriteString(fmt.Sprintf("%s %s \n", hosts[i], hostname))
+					hostsFile.WriteString(fmt.Sprintf("%s %s \n", strings.TrimSpace(hosts[i]), hostname))
 					fmt.Printf("%s %s \n", hosts[i], hostname)
 				}
 			} else {
