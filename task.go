@@ -36,18 +36,21 @@ func resolveHost() {
 	hostsFile, _ := os.Create(filepath.Join("static", "hosts"))
 
 	for namesScanner.Scan() {
-		hostname :=  strings.TrimSpace(namesScanner.Text())
-		if len(hostname) == 0{
+		hostname := strings.TrimSpace(namesScanner.Text())
+		if len(hostname) == 0 {
 			continue
 		}
 		if strings.Index(hostname, "#") == 0 {
 			hostsFile.WriteString(fmt.Sprintf("%s \n", hostname))
-		}else{
+		} else {
+			log.Printf("resolve [%s] \n", hostname)
 			if hosts, err := net.LookupHost(hostname); err == nil {
 				for i := 0; i < len(hosts); i++ {
 					hostsFile.WriteString(fmt.Sprintf("%s %s \n", hosts[i], hostname))
 					fmt.Printf("%s %s \n", hosts[i], hostname)
 				}
+			} else {
+				log.Printf("resolve failed %v \n", err)
 			}
 		}
 	}
